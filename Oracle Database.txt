@@ -1,0 +1,16 @@
+Oracle Database 18c Express Edition
+
+
+Oracle Database Express Edition 접속 정보 :
+
+다중 테넌트 컨테이너 데이터베이스 : localhost:1521
+
+플러그인할 수 있는 데이터베이스 : localhost:1521/XEPDB1
+
+EM Express URL : https://localhost:5500/em
+----------------------------------------------------------------
+sys 권한 (테이블 정의, 데이터 조작, 사용자 정의 + 권한부여)
+
+sys -> 새로운 계정 생성 (kh_jwj)
+
+앞으로 예제 공부는 새로운 계정을 통해서 할거임!
