@@ -24,3 +24,29 @@ GRANT RESOURCE, CONNECT TO kh_jwj;
 
 ALTER USER kh_jwj DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
 -- 객체가 생성될 수 있는 공간 할당량 무제한 지정, 구문 맨 끝에 세미콜론 1개 있어야함!
+
+/* 시험 범위 문제 범위
+ * -----------------------------------------------
+ * <SYS> 사용자 계정 SCRIPT!!!
+ * 맨처음 사용자 계정 생성
+ * SYS : 최고관리자 계정 으로 접속해야함!
+ * 권한부여했었음
+ * GRAND RESOUCE 와 CONNECT 있어야
+ * 테이블을 생성할 수 있는 권한이 생김
+ * -----------------------------------------------------
+ * <kh_jwj> 01_SELECT
+ * 비교연산자 사용방법
+ * 논리연산자 유의할 점 : 우선순위(AND > OR)
+ * ESCAPE 문자(# 또는 ^) LIKE '___#_%'
+ * IS NULL, IS NOT NULL
+ * ------------------------------------------------------
+ * */
+
+/* workbook 문제 해결을 위한 할 것들*/
+CREATE USER workbook IDENTIFIED BY workbook;
+GRANT RESOURCE, CONNECT TO workbook;
+ALTER USER workbook DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
+/* 이후 플러그 모양 클릭 후 오라클, xe,  id=workbook, pw=workbook*/
+
+
+
