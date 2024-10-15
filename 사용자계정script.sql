@@ -31,7 +31,7 @@ ALTER USER kh_jwj DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
  * 맨처음 사용자 계정 생성
  * SYS : 최고관리자 계정 으로 접속해야함!
  * 권한부여했었음
- * GRAND RESOUCE 와 CONNECT 있어야
+ * GRANT RESOUCE 와 CONNECT 있어야
  * 테이블을 생성할 수 있는 권한이 생김
  * -----------------------------------------------------
  * <kh_jwj> 01_SELECT
@@ -47,6 +47,46 @@ CREATE USER workbook IDENTIFIED BY workbook;
 GRANT RESOURCE, CONNECT TO workbook;
 ALTER USER workbook DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
 /* 이후 플러그 모양 클릭 후 오라클, xe,  id=workbook, pw=workbook*/
+
+
+/*
+ * 사례1. 사용자 계정을 만들기 위해 일반 사용자 계정인 TEST계정으로 접속하여 계정이 SAMPLE 비밀번호가 1234인
+ * 계정을 생성하기 위해 CREATE USER SAMPLE; 를 실행하니 정상적으로 실행이 되지 않았다.
+ * 또한 계정을 생성(CREATE명령만 실행 함)을 하여서 접속하려는 데 접속이 되지 않고 테이블도 생성되지 않았다.
+ * 위 문제의 원인과 문제를 해결하기 위한 조치내용을 기술하시오. (50점)
+ * 
+ * 원인: 
+ * 1. 계정을 생성할 수 있는 권한은 최고관리자인 SYS 계정으로 접속해야 하는데,
+ *  일반 사용자 계정으로 접속하여 제대로 실행되지 않음
+ * 2. CREATE 구문 중 비밀번호를 설정하기 위한 코드가 없음
+ * 3. DB에 연결하고 로그인할 수 있는 권한을 부여하는 코드가 없음
+ * 4. 테이블이나 인덱스 같은 DB 객체를 생성할 수 있는 권한을 부여하는 코드가 없음
+ *
+ * 조치내용: 
+ * 1. 일반 사용자 계정인 TEST계정이 아닌, 최고관리자 계정인 SYS계정으로 접속
+ * 
+ * 2. 11G 이전 문법을 사용할 수 있도록 새로운 구문을 추가하고, CREATE 구문을 아래와 같이 수정
+ *    ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
+ *    CREATE USER SAMPLE IDENTIFIED BY 1234;
+ * 
+ * 3. DB에 연결하고 로그인할 수 있는 권한과 테이블 같은 DB생성할 권한을 부여하는 구문을 아래와 같이 추가
+ *    GRANT RESOURCE, CONNECT TO SMAPLE;
+ * 
+ * 4. (추가) 객체가 생성될 수 있는 공간 할당량을 무제한으로 지정하기 위해 아래의 코드 추가
+ *    ALTER USER SMAPLE DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
+ * 
+ * */
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -289,6 +289,59 @@ SELECT EMP_NAME, DEPT_CODE, SALARY
 FROM EMPLOYEE
 ORDER BY DEPT_CODE, SALARY DESC;
 
+/*
+-- <검색조건>
+
+DEPT_CODE가 D9이거나 D6이고 SALARY이 300만원 이상이고 BONUS가 있고
+
+남자이고 이메일주소가 _ 앞에 3글자 있는
+
+사원의 EMP_NAME, EMP_NO, DEPT_CODE, SALARY를 조회
+
+-- <작성된 쿼리구문>
+
+SELECT EMP_NAME, EMP_NO, DEPT_CODE, SALARY
+
+FROM EMPLOYEE
+
+WHERE DEPT_CODE='D9' OR DEPT_CODE='D6' AND SALARY > 3000000
+
+AND EMAIL LIKE '____%' AND BONUS IS NULL;
+* 5개의 문제점이 있음
+* 원인 :
+* 1. WHERE 절의 해석 우선순위가 OR보다 AND가 먼저 이므로 주어진 WHERE 절은 (DEPT_CODE가 D9)이거나 (DEPT_CODE가 D6이고 SALARY가 300만원 초과)로 해석함
+* 2. 300만원 이상을 구해야 하는데 WHERE 절에서는 300만원 초과로 작성되어 있음
+* 3. BONUS가 있는 사원을 구해야 하는데 주어진 코드는 BONUS가 없는 사원을 구하는 코드로 작성되어 있음
+* 4. 남자인 사원을 검색하는 조건 구문이 빠져 있음
+* 5. LIKE에서 '_'는 글자수를 의미하는 것으로서 이메일 주소 자체에 있는 '_'를 기준으로 하기 위해서는 ESCAPE 문자가 있어야함
+*
+* 조치내용 :
+* 1. WHERE절 에서 DEPT_CODE 관련 구문을 아래과 같이 수정
+*   1) IN 구문을 이용 : DEPT_CODE IN ('D9','D6')
+*   2) 소괄호를 사용하여 우선 해석되도록 함 : (DEPT_CODE = 'D9' OR DEPT_CODE = 'D6')
+* 
+* 2. SALARY 구문에서 초과가 아닌 이상이 되도록 아래와 같이 수정
+*   SALARY >= 3000000
+* 
+* 3. BONUS가 있는 사원을 검색하기 위해 아래와 같이 수정
+*   BONUS IS NOT NULL
+* 
+* 4. 남자인 사원을 검색하는 구문을 추가(주민등록번호 뒷자리 첫번쨰번호 1)
+*   AND SUBSTR(EMP_NO, 8, 1) = '1'
+* 
+* 5. EMAIL 검색관련 코드를 ESCAPE 문자를 이용하여 아래와 같이 수정
+*   EMAIL LIKE '___#_%' ESCAPE '#'
+* 
+* 6. 최종 코드
+*/
+SELECT EMP_NAME, EMP_NO, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE DEPT_CODE IN ('D9','D6')
+--WHERE (DEPT_CODE = 'D9' OR DEPT_CODE = 'D6')
+AND SALARY >= 3000000
+AND BONUS IS NOT NULL
+AND SUBSTR(EMP_NO, 8, 1) = '1'
+AND EMAIL LIKE '___#_%' ESCAPE '#';
 
 
 
