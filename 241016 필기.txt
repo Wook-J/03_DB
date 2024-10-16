@@ -1,0 +1,18 @@
+객체(테이블, VIEW, 시퀀스, 인덱스, USER, ...)
+
+지금까지 테이블을 본것임!
+
+~ 241016 : DB까지 프로그램 배워야하는 것들을 개별적으로 기초를 다 배우긴했음..!
+
+JDBC : Java DataBase Connect
+
+Framework 중 Spring Boot(Java 기반)를 이용할 것!
+- 게시판 부분을 나가면 semi project 시작
+- 공공데이터도 하면서
+- React (JS 라이브러리)
+
+semi project 끝나고 1주일 정도 후에 final project..??
+
+단위테스트(by Spring Boot)
+
+erd : db모델링?
