@@ -494,7 +494,7 @@ FROM EMPLOYEE;
 -- 서브쿼리 (상관쿼리 방법으로)
 SELECT AVG(SALARY)
 FROM EMPLOYEE
-WHERE JOB_CODE = 'J1'; /* J2, H2, J4, J3, J3, ... (메인쿼리의 JOB_CODE 순서) */
+WHERE JOB_CODE = 'J1'; /* J2, J2, J4, J3, J3, ... (메인쿼리의 JOB_CODE 순서) */
 -- 단일행 단일열 -> SELECT 절에 쓰면 스칼라 서브쿼리
 
 -- (스칼라 + 상관쿼리)
