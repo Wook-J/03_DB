@@ -49,7 +49,15 @@ ALTER USER workbook DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
 /* 이후 플러그 모양 클릭 후 오라클, xe,  id=workbook, pw=workbook*/
 
 
-/*
+/* 04_JDBC 에서 todoList 실행할 때 필요한 구문 */
+ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
+CREATE USER todoList_jdbc IDENTIFIED BY todoList1234;
+GRANT RESOURCE, CONNECT TO todoList_jdbc;
+ALTER USER todoList_jdbc DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
+
+
+
+/* 평가문제
  * 사례1. 사용자 계정을 만들기 위해 일반 사용자 계정인 TEST계정으로 접속하여 계정이 SAMPLE 비밀번호가 1234인
  * 계정을 생성하기 위해 CREATE USER SAMPLE; 를 실행하니 정상적으로 실행이 되지 않았다.
  * 또한 계정을 생성(CREATE명령만 실행 함)을 하여서 접속하려는 데 접속이 되지 않고 테이블도 생성되지 않았다.
