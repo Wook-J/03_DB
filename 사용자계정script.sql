@@ -55,7 +55,11 @@ CREATE USER todoList_jdbc IDENTIFIED BY todoList1234;
 GRANT RESOURCE, CONNECT TO todoList_jdbc;
 ALTER USER todoList_jdbc DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
 
-
+/* jdbc_ToyProject에서 toyProject 실행할 때 필요한 구문 */
+ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
+CREATE USER toyProject_jdbc IDENTIFIED BY toyProject1234;
+GRANT RESOURCE, CONNECT TO toyProject_jdbc;
+ALTER USER toyProject_jdbc DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
 
 /* 평가문제
  * 사례1. 사용자 계정을 만들기 위해 일반 사용자 계정인 TEST계정으로 접속하여 계정이 SAMPLE 비밀번호가 1234인
